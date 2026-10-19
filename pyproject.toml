@@ -1,0 +1,45 @@
+[project]
+name = "myproject"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "suharevalexey", email = "suharevalexeyy@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "requests>=2.34.2",
+    "ruff>=0.17.1",
+    "ty>=0.0.89",
+]
+
+[project.scripts]
+myproject = "myproject:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ty.environment]
+python-version = "3.13"
+
+[tool.ty.rules]
+invalid-argument-type = "error"
+invalid-assignment = "error"
+invalid-return-type = "error"
