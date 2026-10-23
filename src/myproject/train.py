@@ -1,5 +1,6 @@
 """Baseline training script."""
 
+import math
 import random
 
 import numpy as np
@@ -15,14 +16,20 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
 
 
+def cosine_lr_schedule(base_lr: float, epoch: int, total_epochs: int) -> float:
+    """Cosine annealing learning rate schedule."""
+    return base_lr * 0.5 * (1 + math.cos(math.pi * epoch / total_epochs))
+
+
 def train(lr: float = LEARNING_RATE, epochs: int = EPOCHS) -> dict[str, float]:
-    """Run toy training loop and return final metrics."""
+    """Run toy training loop with cosine LR schedule and return final metrics."""
     set_seed(SEED)
 
     loss = 1.0
     for epoch in range(epochs):
-        loss *= 1 - lr
-        print(f"epoch {epoch + 1}/{epochs}  loss={loss:.4f}")
+        current_lr = cosine_lr_schedule(lr, epoch, epochs)
+        loss *= 1 - current_lr
+        print(f"epoch {epoch + 1}/{epochs}  lr={current_lr:.5f}  loss={loss:.4f}")
 
     return {"loss": loss, "lr": lr, "epochs": epochs}
 
