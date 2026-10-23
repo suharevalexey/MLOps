@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+
+# ML artifacts — track with Git LFS or DVC instead
+*.pth
+*.onnx
+*.ckpt
+*.pt
+data/
+mlruns/
